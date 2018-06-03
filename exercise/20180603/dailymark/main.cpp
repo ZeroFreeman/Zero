@@ -8,7 +8,7 @@ int main()
 {
     ofstream a;
     time_t timer = time(NULL);
-    a.open("Sign_In.txt", ios_base::app);
+    a.open("readme.txt", ios_base::app);
     a << ctime(&timer);
 
     a.close();
