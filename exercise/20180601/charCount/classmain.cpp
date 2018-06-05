@@ -5,7 +5,7 @@
 using namespace std;
 
 //进行字符串的输入，各个字符的统计和分类
-int TCounter::cinStr()
+int TLetterStatic::cinStr()
 {
     string str;
     //cout << "Please input a string : " << endl;
@@ -28,59 +28,45 @@ int TCounter::cinStr()
     return 0;
 }
 
-//给分类计数器设置为0
-void TCounter::reset()
+void TLetterStatic::reset()
 {
     AH = HN = NZ = other = 0;
 }
 
-void TCounter::Show(ofstream& outfile)
-{
-    cout << "AH = " << AH << endl
-         << "HN = " << HN << endl
-         << "NZ = " << NZ << endl
-         << "other = " << other << endl;
-    outfile << "AH = " << AH << endl
-            << "HN = " << HN << endl
-            << "NZ = " << NZ << endl
-            << "other = " << other << endl << endl;
-}
-
-void TLetterStatic::showOther(ofstream& outfile)
-{
-    cout << "Other = " << other << endl;
-    outfile << "Other = " << other << endl;
-}
-
-//统计AN区间内字符个数
-void TANCounter::showAN(TLetterStatic& a, ofstream& outfile)
+void TANCounter::makeCount(TLetterStatic & a)
 {
     AN = a.AH + a.HN;
-    cout << "AN = " << AN  << endl;
-    outfile << "AN = " << AN  << endl;
 }
 
-//统计HZ区间内的字符个数
-void THZCounter::showHZ(TLetterStatic& a, ofstream& outfile)
+void TANCounter::show(ofstream & fout)
+{
+    cout << "AN = " << AN << endl;
+    fout << "AN = " << AN << endl;
+}
+
+void THZCounter::makeCount(TLetterStatic & a)
 {
     HZ = a.HN + a.NZ;
+}
+
+void THZCounter::show(ofstream & fout)
+{
     cout << "HZ = " << HZ << endl;
-    outfile << "HZ = " << HZ << endl;
+    fout << "HZ = " << HZ << endl;
 }
 
-TLetterStatic::TLetterStatic(TCounter& a)
+void TCounter::makeCount(TLetterStatic & a)
 {
-    this->AH += a.AH;
-    this->HN += a.HN;
-    this->NZ += a.NZ;
-    this->other += a.other;
+    other = a.other;
 }
 
-/*
-void fileOut()
+void TCounter::show(ofstream & fout)
 {
-    ofstream outfile;
-    outfile.open("result.txt");
-    outfile << "AN = " <<
+    cout << "other = " << other << endl;
+    fout << "other = " << other << endl;
 }
-*/
+
+void print(TCounter & p, ofstream & fout)
+{
+    p.show(fout);
+}

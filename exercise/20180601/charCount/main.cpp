@@ -1,39 +1,44 @@
 #include <iostream>
 #include <fstream>
+#include <time.h>
 #include "classmain.h"
+
 using namespace std;
 
 int main()
 {
-    ofstream outfile;
-    outfile.open("result.txt");
+    ofstream fout;
+    time_t timer = time(NULL);
+
+    fout.open("result.txt", ios_base::app);
+    fout << ctime(&timer);
     cout << "If you want to exit, you can input '#exit'" << endl;
     cout << "Please input string : " << endl;
 
-    TANCounter t1;
-    THZCounter t2;
-    t1.reset();
-
+    TLetterStatic start;
+    start.reset();
     while(1)
     {
-        if (t1.cinStr())
+        if (start.cinStr())
             break;
     }
-    TLetterStatic total(t1);
 
-    t1.Show(outfile);
-    cout << endl << "------------------------------\n" << endl;
-    t1.showAN(total, outfile);
-    t2.showHZ(total, outfile);
-    total.showOther(outfile);
+    TCounter t1;
+    TANCounter t2;
+    THZCounter t3;
+    t1.makeCount(start);
+    t2.makeCount(start);
+    t3.makeCount(start);
 
-    outfile.close();
-    cout << "The data has been successfully imported into the 'result.txt'" << endl;
+    cout << "------------------------------------------------------"
+         << endl;
 
-   // ofstream outfile;
-   // outfile.open("result.txt");
+    print(t1, fout);
+    print(t2, fout);
+    print(t3, fout);
 
-    //void fileOut();
+    fout << endl;
+    fout.close();
 
     return 0;
 }
