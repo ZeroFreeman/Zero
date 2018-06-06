@@ -16,26 +16,20 @@ int main()
     cout << "Please input string : " << endl;
 
     TLetterStatic start;
-    start.reset();
-    while(1)
-    {
-        if (start.cinStr())
-            break;
-    }
-
     TCounter t1;
     TANCounter t2;
     THZCounter t3;
-    t1.makeCount(start);
-    t2.makeCount(start);
-    t3.makeCount(start);
+    start.reset();
+    while(1)
+    {
+        if (start.cinStr(t1, t2, t3, start))
+            break;
+    }
 
     cout << "------------------------------------------------------"
          << endl;
 
-    print(t1, fout);
-    print(t2, fout);
-    print(t3, fout);
+    t1.show(start, fout);
 
     fout << endl;
     fout.close();

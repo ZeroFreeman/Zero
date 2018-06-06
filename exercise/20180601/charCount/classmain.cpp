@@ -5,7 +5,7 @@
 using namespace std;
 
 //进行字符串的输入，各个字符的统计和分类
-int TLetterStatic::cinStr()
+int TLetterStatic::cinStr(TCounter & t1, TCounter & t2, TCounter & t3, TLetterStatic & start)
 {
     string str;
     //cout << "Please input a string : " << endl;
@@ -17,56 +17,58 @@ int TLetterStatic::cinStr()
     for (unsigned int i = 0; i < strlen(getStr); i++)
     {
         if ((getStr[i] >= 97 && getStr[i] <= 104) || (getStr[i] >= 65 && getStr[i] <= 72))
-            AH++;
-        else if ((getStr[i] >= 104 && getStr[i] <= 110) || (getStr[i] >= 72 && getStr[i] <= 78))
-                HN++;
-        else if ((getStr[i] >= 110 && getStr[i] <= 122) || (getStr[i] >= 78 && getStr[i] <= 90))
-                NZ++;
+            Count(t2, start);
         else
-            other++;
+        {
+            if ((getStr[i] >= 104 && getStr[i] <= 110) || (getStr[i] >= 72 && getStr[i] <= 78))
+            {
+                Count(t2, start);
+                Count(t3, start);
+            }
+            else
+            {
+                if ((getStr[i] >= 110 && getStr[i] <= 122) || (getStr[i] >= 78 && getStr[i] <= 90))
+                    Count(t3, start);
+                else
+                    Count(t1, start);
+            }
+        }
     }
     return 0;
 }
 
 void TLetterStatic::reset()
 {
-    AH = HN = NZ = other = 0;
+    AN = HZ = other = 0;
 }
 
 void TANCounter::makeCount(TLetterStatic & a)
 {
-    AN = a.AH + a.HN;
-}
-
-void TANCounter::show(ofstream & fout)
-{
-    cout << "AN = " << AN << endl;
-    fout << "AN = " << AN << endl;
+    a.AN++;
 }
 
 void THZCounter::makeCount(TLetterStatic & a)
 {
-    HZ = a.HN + a.NZ;
-}
-
-void THZCounter::show(ofstream & fout)
-{
-    cout << "HZ = " << HZ << endl;
-    fout << "HZ = " << HZ << endl;
+    a.HZ++;
 }
 
 void TCounter::makeCount(TLetterStatic & a)
 {
-    other = a.other;
+    a.other++;
 }
 
-void TCounter::show(ofstream & fout)
+
+void Count(TCounter & p, TLetterStatic & start)
 {
-    cout << "other = " << other << endl;
-    fout << "other = " << other << endl;
+    p.makeCount(start);
 }
 
-void print(TCounter & p, ofstream & fout)
+void TCounter::show(TLetterStatic & a, ofstream & fout)
 {
-    p.show(fout);
+    cout << "AN = " << a.AN << endl
+         << "HZ = " << a.HZ << endl
+         << "other = " << a.other << endl;
+    fout << "AN = " << a.AN << endl
+         << "HZ = " << a.HZ << endl
+         << "other = " << a.other << endl;
 }
