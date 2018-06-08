@@ -1,6 +1,6 @@
 **It is used to get the sum about Odd number  cubes and Even number square**  
 
-求一组数中奇数的立方和和偶数的平方和  
+求一组数中奇数的立方和以及偶数的平方和  
 
 Problem Description
 
