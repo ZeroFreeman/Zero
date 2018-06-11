@@ -1,5 +1,5 @@
 **It is used to solve the problem about eating peach**  
-这是一个孙悟空吃蟠桃的故事  
+这是一个孙悟空吃蟠桃的故事    
 Problem Description
 喜欢西游记的同学肯定都知道悟空偷吃蟠桃的故事，你们一定都觉得这猴子太闹腾了，其实你们是有所不知：悟空是在研究一个数学问题！
 什么问题？他研究的问题是蟠桃一共有多少个！
