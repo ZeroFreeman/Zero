@@ -74,6 +74,7 @@ void TTranslator::getFile(TTranslator & t, TTranslator & t1, TTranslator & t2)
 {
     ofstream fout;
     ifstream fin;
+    rename("change.html", "change.txt");
     fout.open("change.txt", ios_base::out);
     fin.open("source.txt", ios_base::in);
     string str;
@@ -106,6 +107,7 @@ void THtmlDoc::html()
     fout << "</body>\n</html>" << endl;//回补标签
     fout.close();
     rename("change.txt", "change.html");
+
 }
 
 int main()
