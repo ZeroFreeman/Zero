@@ -3,48 +3,38 @@
 
 using namespace std;
 
+bool comp(int a, int b)
+{
+    return abs(a) > abs(b);
+}
+
+
+
 int main()
 {
     int n;
     while (scanf("%d", &n) != EOF)
     {
-        if (n < 100 && n > 0)
+        if (n > 0 && n < 100)
         {
-            int Sort[100] = { 0 };
-            int sign[100];
-            int a, z = 0, j = 0;
+            int a[100];
+            int j = 0;
             for (int i = 0; i < n; i++)
             {
-                scanf("%d", &a);
-                if (a < 0)
-                {
-                    Sort[i] = -a;
-                    sign[j] = a;
-                    j++;
-                }
-                else
-                    Sort[i] = a;
-
+                scanf("%d", &a[i]);
             }
 
-            sort(Sort, Sort + n);
+            sort(a, a + n, comp);
 
-            for (int i = 0; i < n; i++, z++)
+            for (int i = 0; i < n; i++, j++)
             {
-                int q = 0;
-                if (z)
+                if (j)
                     printf(" ");
-                for (int p = 0; p < j; p++)
-                {
-                    if (Sort[i] == -sign[p])
-                        q = 1;
-                    if (q)
-                        printf("%d", -Sort[i]);
-                    else
-                        printf("%d", Sort[i]);
-                }
+                printf("%d", a[i]);
             }
+            printf("\n");
         }
+
     }
     return 0;
 }
